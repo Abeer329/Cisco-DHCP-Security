@@ -1,0 +1,26 @@
+! Switch Security Configuration
+
+hostname SW1
+
+ip dhcp snooping
+ip dhcp snooping vlan 1
+
+!
+! Trusted DHCP Server Port
+!
+interface GigabitEthernet0/2
+ description DHCP_Server
+ ip dhcp snooping trust
+
+!
+! Client and Attacker Ports
+!
+interface range GigabitEthernet0/0 - 1
+ ip dhcp snooping limit rate 10
+
+!
+! Verification Commands
+!
+show ip dhcp snooping
+show ip dhcp snooping statistics
+
